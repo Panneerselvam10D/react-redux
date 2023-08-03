@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { AddTaskToList } from '../Slices/TaskSlice';
+import {  addTaskToServer, getTasksFromServer } from '../Slices/TaskSlice';
 import { useDispatch } from 'react-redux';
 
 
@@ -14,10 +14,13 @@ const AddTask = () => {
     const addTask = (e)=> {
            e.preventDefault()
            console.log({title,description}) 
-           dispatch(AddTaskToList({title,description}))
+           dispatch(addTaskToServer({title,description}))
            setTitle("")
            setDescription("")
     }
+    useEffect(()=>{
+        dispatch(getTasksFromServer())
+    },[dispatch])
 
   return (
     
@@ -35,6 +38,7 @@ const AddTask = () => {
       value={description} onChange={(e)=>setDescription(e.target.value)} />
     </Form.Group>
     <div className='text-end'> 
+    
     <Button variant="primary" type="submit" onClick={(e)=> addTask(e)}>
       Add Task
     </Button>

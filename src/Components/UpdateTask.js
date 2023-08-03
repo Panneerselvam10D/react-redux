@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSelectedList } from '../Slices/TaskSlice';
+import { patchUpdateInServer, setSelectedList } from '../Slices/TaskSlice';
 import { updateTaskFromList } from '../Slices/TaskSlice';
 
 
@@ -19,7 +19,7 @@ const UpdateTask = (props) => {
 
     const updateTask =()=>{
         props.onHide()
-        dispatch(updateTaskFromList({id,title,description}))
+        dispatch(patchUpdateInServer({id,title,description}))
     }
 
     useEffect(()=>{

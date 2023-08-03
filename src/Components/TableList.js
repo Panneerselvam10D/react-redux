@@ -3,7 +3,7 @@
 import Button from 'react-bootstrap/esm/Button';
 import UpdateTask from './UpdateTask';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSelectedList} from '../Slices/TaskSlice';
+import { deleteTaskFromServer, setSelectedList} from '../Slices/TaskSlice';
 import { removeTaskFromList } from '../Slices/TaskSlice';
 
  
@@ -20,7 +20,11 @@ const  {taskList} =useSelector((state) =>state.tasks)
      const deleteTask = (task) =>
      {
          console.log('delete task');
-        dispatch(removeTaskFromList(task))
+        dispatch(deleteTaskFromServer(task))
+        .unwrap()
+        .then(() => {
+          dispatch(removeTaskFromList(task))
+        })
      }  
       return (
         <>

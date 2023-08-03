@@ -6,4 +6,6 @@ import tasksReducer from './Slices/TaskSlice'
         tasks :tasksReducer
 
     }
-})
+  
+}
+ )
